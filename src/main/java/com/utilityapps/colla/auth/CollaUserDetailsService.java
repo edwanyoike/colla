@@ -28,6 +28,7 @@ public class CollaUserDetailsService implements UserDetailsService {
         User user = userService.findUserByUsername(username);
            if( user != null)
            {
+               System.out.println("in here");
                List<AuthGroup>  authGroups = authGroupRepository.findByUsername(user.getUsername());
                return new CollaUserPrincipal( user, authGroups);
 

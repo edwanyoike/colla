@@ -16,5 +16,5 @@ public class HelpRequest {
 
     private User from;
 
-    private Problem problem;
+    private CollaProblem collaProblem;
 }
