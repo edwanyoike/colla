@@ -27,16 +27,16 @@ public class CollaProblemService implements CollaProblemI {
 
     @Override
     public CollaProblem findById(long id) {
-        return null;
+        return collaProblemRepository.findById(id);
     }
 
     @Override
     public List<CollaProblem> findByUser(User user) {
-        return null;
+        return collaProblemRepository.findByCreateddBy(user);
     }
 
     @Override
     public List<CollaProblem> findSolvedOnes() {
-        return null;
+        return collaProblemRepository.findBySolved();
     }
 }

@@ -15,6 +15,7 @@ public class HelpRequest {
     private long id;
 
     private User from;
+    private User to;
 
     private CollaProblem collaProblem;
 }

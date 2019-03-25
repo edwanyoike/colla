@@ -13,5 +13,6 @@ public interface UserServiceI {
     List findAll();
 
     User findUserByUsername(String uname);
+    User findUserById(Long id);
 
 }

@@ -17,5 +17,9 @@ public class Notification  {
 
     private NotificationType notificationType;
 
+    private User owner;
+
+    private Boolean seen;
+
 
 }
