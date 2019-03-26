@@ -5,15 +5,16 @@ import com.utilityapps.colla.interfaces.NotificationI;
 import com.utilityapps.colla.models.Notification;
 import com.utilityapps.colla.models.User;
 import com.utilityapps.colla.services.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+@RestController
 public class NotificationController {
 
     private final NextSequenceServiceI nextSequenceService;
@@ -26,10 +27,11 @@ public class NotificationController {
         this.userService = userService;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/notification")
     public String createUser(@RequestBody Notification notification){
 
         notification.setId(nextSequenceService.getNextSequence("customSequences"));
+        notification.setDate(new Date());
 
         if(notificationService.save(notification) != null) {
             return "done";
@@ -40,7 +42,7 @@ public class NotificationController {
 
     }
 
-    @GetMapping(value = "/notifications")
+    @GetMapping(value = "/notification")
     public ModelAndView getAll(ModelAndView modelAndView){
         List<Notification> notifications = notificationService.findAll();
         modelAndView.addObject("notifications",notifications);
@@ -63,7 +65,7 @@ public class NotificationController {
         Long id  = Long.valueOf( request.getSession(false).getAttribute("user_id").toString() );
         User user = userService.findUserById(id);
 
-        List<Notification> notifications = notificationService.findSeenNotifications(user);
+        List<Notification> notifications = notificationService.findSeenNotifications(id);
         modelAndView.addObject("notifications",notifications);
         modelAndView.setViewName("notifications"); //TODO make this view
 
@@ -76,12 +78,31 @@ public class NotificationController {
         Long id  = Long.valueOf( request.getSession(false).getAttribute("user_id").toString() );
         User user = userService.findUserById(id);
 
-        List<Notification> notifications = notificationService.findUnseenNotifications(user);
+        List<Notification> notifications = notificationService.findUnseenNotifications(id);
         modelAndView.addObject("notifications",notifications);
         modelAndView.setViewName("notifications"); //TODO make this view
 
         return modelAndView;
     }
+
+    public ModelAndView getSingleNotification(@PathParam("id") Long id, ModelAndView modelAndView, HttpServletRequest request){
+
+        Optional<Notification> notificationOptional = notificationService.findById(id);
+        if(notificationOptional.isPresent())
+        {
+            modelAndView.addObject("notifications",notificationOptional.get());
+        }
+
+        else {
+            modelAndView.addObject("Zeronotifications","you have no notifications here");
+        }
+
+        modelAndView.setViewName("notifications"); //TODO make this view
+
+        return modelAndView;
+    }
+
+
 
 
 

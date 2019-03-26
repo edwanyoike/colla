@@ -12,6 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
@@ -55,7 +58,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login","/index","/create","/resources/**", "/webjars/**","/static/**","/css/**","/js/**","/scss/**","/vendor/**").permitAll()
+                .antMatchers("/login","/index","/create","/notification","/resources/**", "/webjars/**","/static/**","/css/**","/js/**","/scss/**","/vendor/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -64,7 +67,10 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .successForwardUrl("/success")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/login")
+                .logoutUrl("/x").logoutSuccessUrl("/login").deleteCookies("auth_code", "JSESSIONID","USER").invalidateHttpSession(true);
     }
+
+
 
 }

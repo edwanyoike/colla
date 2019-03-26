@@ -11,6 +11,7 @@ public interface HelpRequestI {
     HelpRequest findById(long id);
     List<HelpRequest> findAll();
     List<HelpRequest> findByFrom(Long id);
-    List<HelpRequest> findAllByTo(Long id);
+    //List<HelpRequest> findAllByTo(Long id);
+    List<HelpRequest> findByCollaProblem_CreateddBy_Id(Long id);
 
 }

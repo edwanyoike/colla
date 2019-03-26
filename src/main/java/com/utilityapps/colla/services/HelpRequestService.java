@@ -37,8 +37,13 @@ public class HelpRequestService implements HelpRequestI {
         return helpRequestRepository.findByFrom_Id(id);
     }
 
+//    @Override
+//    public List<HelpRequest> findAllByTo(Long id) {
+//        return helpRequestRepository.findAllByTo_Id(id);
+//    }
+
     @Override
-    public List<HelpRequest> findAllByTo(Long id) {
-        return helpRequestRepository.findAllByTo_Id(id);
+    public List<HelpRequest> findByCollaProblem_CreateddBy_Id(Long id) {
+        return helpRequestRepository.findByCollaProblem_CreateddBy_Id(id);
     }
 }

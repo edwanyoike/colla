@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NotificationService implements NotificationI {
@@ -34,16 +35,21 @@ public class NotificationService implements NotificationI {
 
     @Override
     public List<Notification> getAllPerUser(Long id) {
-        return notificationRepository.findAllByOwner_Id(id);
+        return notificationRepository.findAllByOwnerId(id);
     }
 
     @Override
-    public List<Notification> findSeenNotifications(User user) {
-        return notificationRepository.findAllByOwnerAndSeenIsTrue(user);
+    public List<Notification> findSeenNotifications(Long userId) {
+        return notificationRepository.findAllByOwnerIdAndSeenIsTrue(userId);
     }
 
     @Override
-    public List<Notification> findUnseenNotifications(User user) {
-        return notificationRepository.findAllByOwnerAndSeenIsFalse(user);
+    public List<Notification> findUnseenNotifications(Long userId) {
+        return notificationRepository.findAllByOwnerIdAndSeenIsFalse( userId);
+    }
+
+    @Override
+    public Optional<Notification> findById(Long id) {
+        return notificationRepository.findById(id);
     }
 }

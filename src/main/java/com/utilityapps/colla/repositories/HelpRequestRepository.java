@@ -13,7 +13,8 @@ public interface HelpRequestRepository extends MongoRepository<HelpRequest,Long>
     List<HelpRequest> findAll();
     List<HelpRequest> findByFrom_Id(Long id);
 
-    List<HelpRequest> findAllByTo_Id(Long id);
+  //  List<HelpRequest> findAllByTo_Id(Long id);
+    List<HelpRequest> findByCollaProblem_CreateddBy_Id(Long id);
 
 
 }
