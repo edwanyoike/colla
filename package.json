@@ -1,0 +1,24 @@
+{
+  "name": "yuicompressor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "startbootstrap-sb-admin-2": "^4.0.2",
+    "yuicompressor": "^2.4.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edwanyoike/colla.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edwanyoike/colla/issues"
+  },
+  "homepage": "https://github.com/edwanyoike/colla#readme"
+}
