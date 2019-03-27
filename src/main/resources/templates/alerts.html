@@ -31,26 +31,68 @@
         <!-- Dropdown - Alerts -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in overflow-auto menu-scroll"  aria-labelledby="alertsDropdown">
             <h6 class="dropdown-header">
-                Alerts Center
+                Notifications
             </h6>
 
-            <a th:each="notifications : ${notification}" class="dropdown-item d-flex align-items-center" th:href="@{'/notification/' + ${notifications.getId()} }">
-                <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                        <i class="fas fa-file-alt text-white"></i>
-                    </div>
+
+            <!--start of notifications area-->
+            <div id="notifications-area">
+            <!--unseen notifications-->
+            <div th:each="notifications : ${notification}">
+
+                <div th:if="${ not notifications.getSeen()}" >
+
+                    <a class="dropdown-item d-flex align-items-center" th:href="@{'/notification/' + ${notifications.getId()} }">
+
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+
+                        <div  class="small text-dark-500 text-truncate" th:text="${notifications.getNotificationBody()}" > </div>
+                        <div class="small text-gray-500 font-weight-bold" th:text="${'by '+notifications.getCreatedBy().getUsername()} + ' on' + ${notifications.getDate()}">anonymous</div>
+
+                        </div>
+                    </a>
+
                 </div>
 
-                <div class="small text-gray-500" th:text="${notifications.getDate()}"></div>
-                <span  th:if="${ notifications.getSeen() }"  th:text="${notifications.getNotificationBody()}"> </span>
-                <!-- ELSE -->
-                <span
-                        th:if="${not notifications.getSeen()}" class="font-weight-bold" th:text="${notifications.getNotificationBody()}" > </span>
-            </a>
+            </div>
+
+            <!--seen notifications-->
+            <div th:each="notifications : ${notification}">
+
+                <div th:if="${ notifications.getSeen()}" >
+
+                    <a class="dropdown-item d-flex align-items-center" th:href="@{'/notification/' + ${notifications.getId()} }">
+
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fas fa-envelope-open text-white"></i>
+                            </div>
+                        </div>
+
+                        <div>
+
+                        <div  class="small text-gray-500 text-truncate" th:text="${notifications.getNotificationBody()}" > </div>
+                        <div class="small text-gray-500 font-weight-bold" th:text="${'by '+notifications.getCreatedBy().getUsername()} + ' on' + ${notifications.getDate()}">anonymous</div>
+
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
             <a th:if="${notification.size()>0}" class="dropdown-item text-center small text-gray-500" th:href="@{/notification}">Show All Alerts</a>
         </div>
+
+        <!--end of notification area-->
     </li>
 
 
@@ -64,29 +106,48 @@
         <!-- Dropdown - Messages -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in overflow-auto menu-scroll" aria-labelledby="messagesDropdown">
             <h6 class="dropdown-header">
-                Message Center
+                assistance requests
             </h6>
 
-            <!--<a th:each="notifications : ${notification}" class="dropdown-item d-flex align-items-center" th:href="@{'/notification/' + ${notifications.getId()} }">-->
-            <a th:each="request:${helpRequest}" class="dropdown-item d-flex align-items-center" th:href="@{'/helprequest/' + ${request.getId()} }">
+            <!--unseen requests-->
+            <div th:each="request:${helpRequest}">
+                <div th:if="${ not request.isSeen()}" >
+                    <a   class="dropdown-item d-flex align-items-center" th:href="@{'/helprequest/' + ${request.getId()} }">
 
-                <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
-                    <div class="status-indicator bg-warning"></div>
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div  class="text-dark-50 text-truncate" th:text="${request.getMessage()}"></div>
+                            <div  class="small text-gray-500 font-weight-bold" th:text="${'by '+request.getFrom().getUsername()+request} + ' on' + ${request.getDateCreated()}">anonymous</div>
+                        </div>
+                    </a>
                 </div>
 
-                <div class="small text-gray-500" th:text="${request.getDateCreated()}"></div>
-                <span  th:if="${ request.isSeen() }"  th:text="${notifications.getNotificationBody()}"> </span>
-                <!-- ELSE -->
-                <span
-                        th:if="${not notifications.getSeen()}" class="font-weight-bold" th:text="${notifications.getNotificationBody()}" > </span>
-            </a>
+            </div>
 
-                <div>
-                    <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+            <!--seen requests-->
+            <div th:each="request:${helpRequest}">
+                <div th:if="${  request.isSeen()}" >
+                    <a   class="dropdown-item d-flex align-items-center" th:href="@{'/helprequest/' + ${request.getId()} }">
+
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fas fa-envelope-open text-white"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div  class="small text-gray-500 text-truncate" th:text="${request.getMessage()}"></div>
+                            <div  class="small text-gray-500 font-weight-bold" th:text="${'by '+request.getFrom().getUsername()+request} + ' on' + ${request.getDateCreated()}">anonymous</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
+
+            </div>
 
         </div>
 

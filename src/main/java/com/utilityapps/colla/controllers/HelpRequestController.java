@@ -1,33 +1,41 @@
 package com.utilityapps.colla.controllers;
 
 
+import com.utilityapps.colla.interfaces.HelpRequestI;
 import com.utilityapps.colla.interfaces.NextSequenceServiceI;
+import com.utilityapps.colla.interfaces.UserServiceI;
 import com.utilityapps.colla.models.HelpRequest;
-import com.utilityapps.colla.models.User;
-import com.utilityapps.colla.services.HelpRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
 @RestController
 public class HelpRequestController {
-    private final HelpRequestService helpRequestService;
+    private final HelpRequestI helpRequestService;
     private final NextSequenceServiceI nextSequenceService;
+    private final UserServiceI userService;
 
     @Autowired
-    public HelpRequestController(HelpRequestService helpRequestService, NextSequenceServiceI nextSequenceService) {
+    public HelpRequestController(HelpRequestI helpRequestService, NextSequenceServiceI nextSequenceService, UserServiceI userService) {
         this.helpRequestService = helpRequestService;
+
         this.nextSequenceService = nextSequenceService;
+        this.userService = userService;
     }
 
     @PostMapping("/helprequest")
-    public String createRequest(@RequestBody HelpRequest helpRequest){
+    public String createRequest(@RequestBody HelpRequest helpRequest, HttpSession session){
 
         helpRequest.setDateCreated(new Date());
+        System.out.println(session.toString()+",.......................");
+//        long id  = Long.valueOf( session.getAttribute("id").toString() );
+        helpRequest.setFrom(userService.findUserById(Long.valueOf(7)));
+
         helpRequest.setId(nextSequenceService.getNextSequence("customSequences"));
 
         if(helpRequestService.save(helpRequest)!= null)
@@ -79,8 +87,8 @@ public class HelpRequestController {
 
     public String getRequestsToLoggedInUser(HttpServletRequest request){
 
-        Long id  = Long.valueOf( request.getSession(false).getAttribute("user_id").toString() );
-        List<HelpRequest> helpRequests = helpRequestService.findByCollaProblem_CreateddBy_Id(id);
+        Long id  = Long.valueOf( request.getSession(false).getAttribute("id").toString() );
+        List<HelpRequest> helpRequests = helpRequestService.findByCollaProblemId(id);
 
         return String.valueOf(helpRequests.size());
     }

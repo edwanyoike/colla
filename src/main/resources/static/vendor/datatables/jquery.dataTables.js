@@ -9795,7 +9795,7 @@
 		/**
 		 * When DataTables calculates the column widths to assign to each column,
 		 * it finds the longest string in each column and then constructs a
-		 * temporary table and reads the widths from that. The collaProblem with this
+		 * temporary table and reads the widths from that. The collaProblemId with this
 		 * is that "mmm" is much wider then "iiii", but the latter is a longer
 		 * string - thus the calculation can go wrong (doing it properly and putting
 		 * it into an DOM object and measuring that is horribly(!) slow). Thus as
@@ -12645,7 +12645,7 @@
 		/**
 		 * When DataTables calculates the column widths to assign to each column,
 		 * it finds the longest string in each column and then constructs a
-		 * temporary table and reads the widths from that. The collaProblem with this
+		 * temporary table and reads the widths from that. The collaProblemId with this
 		 * is that "mmm" is much wider then "iiii", but the latter is a longer
 		 * string - thus the calculation can go wrong (doing it properly and putting
 		 * it into an DOM object and measuring that is horribly(!) slow). Thus as

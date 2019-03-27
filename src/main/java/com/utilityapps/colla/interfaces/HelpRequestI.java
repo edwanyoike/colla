@@ -1,7 +1,6 @@
 package com.utilityapps.colla.interfaces;
 
 import com.utilityapps.colla.models.HelpRequest;
-import com.utilityapps.colla.models.User;
 
 import java.util.List;
 
@@ -12,6 +11,6 @@ public interface HelpRequestI {
     List<HelpRequest> findAll();
     List<HelpRequest> findByFrom(Long id);
     //List<HelpRequest> findAllByTo(Long id);
-    List<HelpRequest> findByCollaProblem_CreateddBy_Id(Long id);
+    List<HelpRequest> findByCollaProblemId(Long id);
 
 }

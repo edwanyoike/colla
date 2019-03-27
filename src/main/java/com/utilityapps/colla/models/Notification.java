@@ -19,7 +19,7 @@ public class Notification  {
 
     private NotificationType notificationType;
 
-    private Long ownerId;
+    private User createdBy;
 
     private Boolean seen;
 

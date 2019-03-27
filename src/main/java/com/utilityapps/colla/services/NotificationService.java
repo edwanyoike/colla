@@ -35,17 +35,17 @@ public class NotificationService implements NotificationI {
 
     @Override
     public List<Notification> getAllPerUser(Long id) {
-        return notificationRepository.findAllByOwnerId(id);
+        return notificationRepository.findAllByCreatedBy_Id(id);
     }
 
     @Override
     public List<Notification> findSeenNotifications(Long userId) {
-        return notificationRepository.findAllByOwnerIdAndSeenIsTrue(userId);
+        return notificationRepository.findAllByCreatedBy_IdAndSeenIsTrue(userId);
     }
 
     @Override
     public List<Notification> findUnseenNotifications(Long userId) {
-        return notificationRepository.findAllByOwnerIdAndSeenIsFalse( userId);
+        return notificationRepository.findAllByCreatedBy_IdAndSeenIsFalse( userId);
     }
 
     @Override

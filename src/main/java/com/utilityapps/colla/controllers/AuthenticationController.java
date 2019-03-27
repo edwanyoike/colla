@@ -11,10 +11,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -34,7 +36,8 @@ public class AuthenticationController {
     @GetMapping(value = {"/login","/"})
     public ModelAndView login(ModelAndView modelAndView, HttpServletRequest request)
     {
-        if (request.getSession(false) == null || request.getSession(false).getAttribute("id") == null) {
+        if ( null == request.getSession(false) || request.getSession(false).getAttribute("id") == null ) {
+
             modelAndView.setViewName("login");
             return modelAndView;
         }
@@ -54,24 +57,39 @@ public class AuthenticationController {
     }
 
     @RequestMapping("/success")
-    public ModelAndView loginSuccessful(ModelAndView modelAndView,HttpServletRequest request){
+    public ModelAndView loginSuccessful(ModelAndView modelAndView, HttpServletRequest request){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username  //TODO find how to get ID
+
         User user = userService.findUserByUsername(name);
+        request.getSession(false).invalidate();
 
         request.getSession(true).setAttribute("id",user.getId());
+        System.out.println("this is the user Id ----> "+ user.getId());
+
         modelAndView.setViewName("index");
         return prepareDashboard(modelAndView,request);
     }
 
-    private ModelAndView prepareDashboard(ModelAndView modelAndView,HttpServletRequest request)
+
+
+        @RequestMapping(value = "/x",method= RequestMethod.GET)
+        public ModelAndView logout(HttpSession session,ModelAndView modelAndView) {
+            session.invalidate();
+            modelAndView.setViewName("redirect:login");
+            return modelAndView;
+        }
+
+
+    private ModelAndView prepareDashboard(ModelAndView modelAndView, HttpServletRequest request)
     {
+        System.out.println(request.getSession(false));
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username  //TODO find how to get ID
         User user = userService.findUserById( Long.parseLong( request.getSession(false).getAttribute("id").toString() ) );
 
-        List<CollaProblem> loggedIssues = collaProblemService.findByUser(user);
+        List<CollaProblem> loggedIssues = collaProblemService.findAll();
 
         List<HelpRequest> helprequest = helpRequestService.findByFrom(user.getId());  //TODO this repo  method should take a user object
 

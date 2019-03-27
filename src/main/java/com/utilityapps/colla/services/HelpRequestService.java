@@ -2,7 +2,6 @@ package com.utilityapps.colla.services;
 
 import com.utilityapps.colla.interfaces.HelpRequestI;
 import com.utilityapps.colla.models.HelpRequest;
-import com.utilityapps.colla.models.User;
 import com.utilityapps.colla.repositories.HelpRequestRepository;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +42,7 @@ public class HelpRequestService implements HelpRequestI {
 //    }
 
     @Override
-    public List<HelpRequest> findByCollaProblem_CreateddBy_Id(Long id) {
-        return helpRequestRepository.findByCollaProblem_CreateddBy_Id(id);
+    public List<HelpRequest> findByCollaProblemId(Long id) {
+        return helpRequestRepository.findByCollaProblemId(id);
     }
 }

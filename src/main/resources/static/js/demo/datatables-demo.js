@@ -99,6 +99,21 @@ $(document).ready(function(){
     send();
 });
 
+ $(document).ready(function() {
+    $('#notifications-area  a').click(
+        function(e) {
+            var txt = $(e.target).text();
+            console.log(txt);
+        }
+
+
+    );
+ });
+
+
+
+
+
 
 
 

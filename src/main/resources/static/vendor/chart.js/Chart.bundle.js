@@ -17758,7 +17758,7 @@ module.exports = function(Chart) {
 	function fitWithPointLabels(scale) {
 		/*
 		 * Right, this is really confusing and there is a lot of maths going on here
-		 * The gist of the collaProblem is here: https://gist.github.com/nnnick/696cc9c55f4b0beb8fe9
+		 * The gist of the collaProblemId is here: https://gist.github.com/nnnick/696cc9c55f4b0beb8fe9
 		 *
 		 * Reaction: https://dl.dropboxusercontent.com/u/34601363/toomuchscience.gif
 		 *

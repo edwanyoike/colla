@@ -15,7 +15,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Document(collection = "collaProblem")
+@Document(collection = "collaProblemId")
 public class CollaProblem {
 
     @Id
@@ -32,6 +32,5 @@ public class CollaProblem {
     private User createddBy;
 
     private boolean solved;
-
 
 }

@@ -18,9 +18,19 @@ public class HelpRequest {
 
     private User from;
     private String message;
-    private CollaProblem collaProblem;
+    private Long collaProblemId;
     private boolean seen;
     private Date dateCreated;
 
-
+    @Override
+    public String toString() {
+        return "HelpRequest{" +
+                "id=" + id +
+                ", from=" + from +
+                ", message='" + message + '\'' +
+                ", collaProblemId=" + collaProblemId +
+                ", seen=" + seen +
+                ", dateCreated=" + dateCreated +
+                '}';
+    }
 }

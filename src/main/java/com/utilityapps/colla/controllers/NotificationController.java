@@ -28,10 +28,13 @@ public class NotificationController {
     }
 
     @PostMapping("/notification")
-    public String createUser(@RequestBody Notification notification){
+    public String createUser(@RequestBody Notification notification,HttpServletRequest request){
 
         notification.setId(nextSequenceService.getNextSequence("customSequences"));
         notification.setDate(new Date());
+//        Long id  = Long.valueOf( request.getSession(false).getAttribute("id").toString() );
+        User user = userService.findUserById(7L);
+        notification.setCreatedBy(user);
 
         if(notificationService.save(notification) != null) {
             return "done";

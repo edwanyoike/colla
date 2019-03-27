@@ -58,17 +58,13 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login","/index","/create","/notification","/resources/**", "/webjars/**","/static/**","/css/**","/js/**","/scss/**","/vendor/**").permitAll()
+                .antMatchers("/login","/index","/create","/notification","/helprequest","/resources/**", "/webjars/**","/static/**","/css/**","/js/**","/scss/**","/vendor/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/login-error")
-                .successForwardUrl("/success")
-                .and()
-                .logout()
-                .logoutSuccessUrl("/login")
-                .logoutUrl("/x").logoutSuccessUrl("/login").deleteCookies("auth_code", "JSESSIONID","USER").invalidateHttpSession(true);
+                .successForwardUrl("/success");
     }
 
 

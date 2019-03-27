@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface NotificationRepository extends MongoRepository<Notification,Long> {
-    List<Notification> findAllByOwnerId(Long id);
+    List<Notification> findAllByCreatedBy_Id(Long id);
 
-    List<Notification> findAllByOwnerIdAndSeenIsTrue(Long ownerId);
-    List<Notification> findAllByOwnerIdAndSeenIsFalse(Long ownerId);
+    List<Notification> findAllByCreatedBy_IdAndSeenIsTrue(Long ownerId);
+    List<Notification> findAllByCreatedBy_IdAndSeenIsFalse(Long ownerId);
 
 }

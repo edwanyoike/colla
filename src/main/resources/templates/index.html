@@ -255,7 +255,7 @@
             <!-- logged issues by the user logged in  -->
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">errors you've logged</h6>
+                <h6 class="m-0 font-weight-bold text-primary">errors repository</h6>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -305,41 +305,38 @@
 
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">errors you've requested for help</h6>
+                <h6 class="m-0 font-weight-bold text-primary"> assistance requests</h6>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-bordered dataTable table-hover table-striped "  id="dataTable2" width="100%" cellspacing="0">
-                    <thead>
+                    <thead >
                     <tr>
-                      <th>To</th>
-                      <th>problem referenced</th>
                       <th>message</th>
+                      <th>error referenced</th>
                       <th>date of request</th>
-                      <th>problem solved</th>
+                      <th>request seen</th>
 
                     </tr>
                     </thead>
 
                     <tfoot>
                     <tr>
-                      <th>To</th>
-                      <th>problem referenced</th>
                       <th>message</th>
+                      <th>problem referenced</th>
                       <th>date of request</th>
-                      <th>problem solved</th>
+                      <th>request seen</th>
 
                     </tr>
                     </tfoot>
                     <tbody>
 
                     <tr th:each="request : ${helprequest}">
-                      <td th:text="${request.getTo()}"></td>
-                      <td th:text="${request.getCollaProblem()}"></td>
+                      <td th:text="${request.getMessage()}"></td>
+                      <td th:text="${request.getCollaProblemId()}"></td>
                       <td th:text="${request.getDateCreated()}"></td>
-                      <td th:text="${request.getCollaProblem().isSolved()}"></td>
+                      <td th:text="${request.isSeen()}"></td>
                     </tr>
-
 
                     </tbody>
                   </table>
