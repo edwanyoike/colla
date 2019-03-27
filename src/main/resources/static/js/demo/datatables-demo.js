@@ -1,32 +1,33 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
   $('#dataTable').DataTable({
-
-      columnDefs: [{
-          orderable: false,
-          className: 'select-checkbox',
-          targets: 0
-      }],
-      select: {
-          style: 'os',
-          selector: 'td:first-child'
+          columnDefs:[{targets:1,className:"truncate"}],
+          createdRow: function(row){
+              var td = $(row).find(".truncate");
+              td.attr("title", td.html());
+          }
       }
-  });
+
+
+
+  );
     $('#dataTable2').DataTable({
-
-        columnDefs: [{
-            orderable: false,
-            className: 'select-checkbox',
-            targets: 0
-        }],
-        select: {
-            style: 'os',
-            selector: 'td:first-child'
+            columnDefs:[{targets:1,className:"truncate"}],
+            createdRow: function(row){
+                var td = $(row).find(".truncate");
+                td.attr("title", td.html());
+            }
         }
-    });
 
+
+    );
 
 });
+
+
+
+
+
 
 //notifications polling function.
 /*
@@ -97,12 +98,6 @@ function send(){
 
 send();
 
-$('.notification  a').click(
-    function() {
-        var txt = $(this).attr('href');
-        console.log(txt);
-        alert(txt);
-    });
 
 
 

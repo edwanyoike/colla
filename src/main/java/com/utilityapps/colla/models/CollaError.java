@@ -15,8 +15,8 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Document(collection = "collaProblem")
-public class CollaProblem {
+@Document(collection = "collaError")
+public class CollaError {
 
     @Id
     private long id;
@@ -32,5 +32,8 @@ public class CollaProblem {
     private User createddBy;
 
     private boolean solved;
+
+    //TODO add comments
+    //TODO add  solvedby
 
 }

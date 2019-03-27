@@ -1,10 +1,10 @@
 package com.utilityapps.colla.controllers;
 
 
-import com.utilityapps.colla.models.CollaProblem;
+import com.utilityapps.colla.models.CollaError;
 import com.utilityapps.colla.models.HelpRequest;
 import com.utilityapps.colla.models.User;
-import com.utilityapps.colla.services.CollaProblemService;
+import com.utilityapps.colla.services.CollaErrorService;
 import com.utilityapps.colla.services.HelpRequestService;
 import com.utilityapps.colla.services.UserService;
 import org.springframework.security.core.Authentication;
@@ -22,18 +22,18 @@ import java.util.List;
 @RestController
 public class AuthenticationController {
 
-    private final CollaProblemService collaProblemService;
+    private final CollaErrorService collaProblemService;
     private final UserService userService;
     private final HelpRequestService helpRequestService;
 
-    public AuthenticationController(CollaProblemService problemService, UserService userService, HelpRequestService helpRequestService) {
+    public AuthenticationController(CollaErrorService problemService, UserService userService, HelpRequestService helpRequestService) {
         this.collaProblemService = problemService;
         this.userService = userService;
 
         this.helpRequestService = helpRequestService;
     }
 
-    @GetMapping(value = {"/login","/"})
+    @RequestMapping(value = {"/login","/"})
     public ModelAndView login(ModelAndView modelAndView, HttpServletRequest request)
     {
         if ( null == request.getSession(false) || request.getSession(false).getAttribute("id") == null ) {
@@ -63,7 +63,6 @@ public class AuthenticationController {
         String name = auth.getName(); //get logged in username  //TODO find how to get ID
 
         User user = userService.findUserByUsername(name);
-        request.getSession(false).invalidate();
 
         request.getSession(true).setAttribute("id",user.getId());
         System.out.println("this is the user Id ----> "+ user.getId());
@@ -77,7 +76,7 @@ public class AuthenticationController {
         @RequestMapping(value = "/x",method= RequestMethod.GET)
         public ModelAndView logout(HttpSession session,ModelAndView modelAndView) {
             session.invalidate();
-            modelAndView.setViewName("redirect:login");
+           modelAndView.setViewName("redirect:login");
             return modelAndView;
         }
 
@@ -89,7 +88,7 @@ public class AuthenticationController {
         String name = auth.getName(); //get logged in username  //TODO find how to get ID
         User user = userService.findUserById( Long.parseLong( request.getSession(false).getAttribute("id").toString() ) );
 
-        List<CollaProblem> loggedIssues = collaProblemService.findAll();
+        List<CollaError> loggedIssues = collaProblemService.findAll();
 
         List<HelpRequest> helprequest = helpRequestService.findByFrom(user.getId());  //TODO this repo  method should take a user object
 

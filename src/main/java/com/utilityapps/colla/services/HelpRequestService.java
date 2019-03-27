@@ -44,6 +44,6 @@ public class HelpRequestService implements HelpRequestI {
 
     @Override
     public List<HelpRequest> findByCollaProblemId(Long id) {
-        return helpRequestRepository.findByCollaProblemId(id);
+        return helpRequestRepository.findByCollaError_Id(id);
     }
 }

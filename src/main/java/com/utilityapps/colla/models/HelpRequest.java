@@ -18,7 +18,7 @@ public class HelpRequest {
 
     private User from;
     private String message;
-    private CollaProblem collaProblem;
+    private CollaError collaError;
     private boolean seen;
     private Date dateCreated;
 

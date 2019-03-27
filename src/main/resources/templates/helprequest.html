@@ -7,11 +7,11 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered dataTable table-hover table-striped "  id="dataTable3" width="100%" cellspacing="0">
+                <table class="table table-bordered dataTable table-hover table-striped "  id="help-request-datatable" width="100%" cellspacing="0">
                     <thead >
                     <tr>
                         <th>from</th>
-                        <th>collaProblem</th>
+                        <th>collaError</th>
                         <th>message</th>
                         <th>date created</th>
 
@@ -21,7 +21,7 @@
                     <tfoot>
                     <tr>
                         <th>from</th>
-                        <th>collaProblem</th>
+                        <th>collaError</th>
                         <th>message</th>
                         <th>date created</th>
 
@@ -32,7 +32,7 @@
                     <div th:if="${request != null  }">
                         <tr >
                             <td th:text="${request.from.getUsername()}"></td>
-                            <td th:if="${request.getCollaProblem().getDescription() !=null}" th:text="${request.getCollaProblem().getDescription()}"></td>
+                            <td th:text="${request.getCollaError().getErrorSnipet()}"  ></td>-->
                             <td th:text="${request.getMessage()}"></td>
                             <td th:text="${request.getDateCreated()}"></td>
 
@@ -47,5 +47,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+
+    </script>
 
 </div>

@@ -4,9 +4,9 @@ package com.utilityapps.colla.controllers;
 import com.utilityapps.colla.interfaces.HelpRequestI;
 import com.utilityapps.colla.interfaces.NextSequenceServiceI;
 import com.utilityapps.colla.interfaces.UserServiceI;
-import com.utilityapps.colla.models.CollaProblem;
+import com.utilityapps.colla.models.CollaError;
 import com.utilityapps.colla.models.HelpRequest;
-import com.utilityapps.colla.services.CollaProblemService;
+import com.utilityapps.colla.services.CollaErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,10 +22,10 @@ public class HelpRequestController {
     private final HelpRequestI helpRequestService;
     private final NextSequenceServiceI nextSequenceService;
     private final UserServiceI userService;
-    private final CollaProblemService collaProblemService;
+    private final CollaErrorService collaProblemService;
 
     @Autowired
-    public HelpRequestController(HelpRequestI helpRequestService, NextSequenceServiceI nextSequenceService, UserServiceI userService, CollaProblemService collaProblemService) {
+    public HelpRequestController(HelpRequestI helpRequestService, NextSequenceServiceI nextSequenceService, UserServiceI userService, CollaErrorService collaProblemService) {
         this.helpRequestService = helpRequestService;
 
         this.nextSequenceService = nextSequenceService;
@@ -40,8 +40,8 @@ public class HelpRequestController {
         System.out.println(session.toString()+",.......................");
 //        long id  = Long.valueOf( session.getAttribute("id").toString() );
         helpRequest.setFrom(userService.findUserById((7L)));
-       CollaProblem collaProblem =  collaProblemService.findById(55L);
-       helpRequest.setCollaProblem(collaProblem);
+       CollaError collaError =  collaProblemService.findById(34L);
+       helpRequest.setCollaError(collaError);
 
         helpRequest.setId(nextSequenceService.getNextSequence("customSequences"));
 
@@ -69,6 +69,10 @@ public class HelpRequestController {
         if(helpRequestOptional.isPresent()) {
             modelAndView.addObject("request", helpRequestOptional.get());
         } //TODO throw an exception if optional is empty
+
+        System.out.println("this is the retrieved request by help request controller "+ helpRequestOptional.get().getId());
+        System.out.println("this is the retrieved request by help request error controller "+ helpRequestOptional.get().getCollaError().getId());
+
         modelAndView.setViewName("helprequest");
 
         return modelAndView;

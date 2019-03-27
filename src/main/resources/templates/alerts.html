@@ -182,6 +182,7 @@
         $('.help-request  a').click(
             function() {
                 var txt = $(this).attr('name');
+                console.log(txt);
                 $.ajax({
                     type: "get",
                     url: txt,
