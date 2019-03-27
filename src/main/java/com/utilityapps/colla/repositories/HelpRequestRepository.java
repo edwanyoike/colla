@@ -8,12 +8,10 @@ import java.util.List;
 
 @Repository
 public interface HelpRequestRepository extends MongoRepository<HelpRequest,Long> {
-    HelpRequest findById(long id);
     List<HelpRequest> findAll();
     List<HelpRequest> findByFrom_Id(Long id);
 
   //  List<HelpRequest> findAllByTo_Id(Long id);
     List<HelpRequest> findByCollaProblemId(Long id);
-
 
 }

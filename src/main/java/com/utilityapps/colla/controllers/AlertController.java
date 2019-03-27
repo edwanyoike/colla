@@ -28,10 +28,7 @@ public class AlertController {
         modelAndView.setViewName("alerts");
         //Long id  = Long.valueOf( session.getAttribute("id").toString() );
         List<Notification> notification = notificationService.findAll();
-        List<HelpRequest> helpRequest = helpRequestService.findByCollaProblemId((long) 55);
-
-        System.out.println(helpRequest.get(0));
-
+        List<HelpRequest> helpRequest = helpRequestService.findAll();
         modelAndView.addObject("notificationcount",notification.size());
         modelAndView.addObject("requestcount",helpRequest.size());
         modelAndView.addObject("notification",notification);

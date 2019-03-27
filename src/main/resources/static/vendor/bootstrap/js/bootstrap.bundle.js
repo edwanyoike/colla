@@ -2803,7 +2803,7 @@
     // If the content of the popper grows once it's been positioned, it
     // may happen that the popper gets misplaced because of the new content
     // overflowing its reference element
-    // To avoid this collaProblemId, we provide two options (x and y), which allow
+    // To avoid this collaProblem, we provide two options (x and y), which allow
     // the consumer to define the offset origin.
     // If we position a popper on top of a reference element, we can set
     // `x` to `top` to make the popper grow towards its top instead of

@@ -1,0 +1,51 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:th="http://www.thymeleaf.org">
+
+    <div class="card shadow mb-4" >
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"> assistance requests</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered dataTable table-hover table-striped "  id="dataTable3" width="100%" cellspacing="0">
+                    <thead >
+                    <tr>
+                        <th>from</th>
+                        <th>collaProblem</th>
+                        <th>message</th>
+                        <th>date created</th>
+
+                    </tr>
+                    </thead>
+
+                    <tfoot>
+                    <tr>
+                        <th>from</th>
+                        <th>collaProblem</th>
+                        <th>message</th>
+                        <th>date created</th>
+
+                    </tr>
+                    </tfoot>
+                    <tbody>
+
+                    <div th:if="${request != null  }">
+                        <tr >
+                            <td th:text="${request.from.getUsername()}"></td>
+                            <td th:if="${request.getCollaProblem().getDescription() !=null}" th:text="${request.getCollaProblem().getDescription()}"></td>
+                            <td th:text="${request.getMessage()}"></td>
+                            <td th:text="${request.getDateCreated()}"></td>
+
+                        </tr>
+                    </div>
+
+                    </tbody>
+                </table>
+
+                <!-- end of  issues user requested for help -->
+
+            </div>
+        </div>
+    </div>
+
+</div>

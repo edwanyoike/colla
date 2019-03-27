@@ -1,0 +1,47 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+
+<div class="card shadow mb-4" >
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"> assistance requests</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered dataTable table-hover table-striped "  id="dataTable3" width="100%" cellspacing="0">
+                <thead >
+                <tr>
+                    <th>notification content</th>
+                    <th>created by</th>
+                    <th>date created</th>
+
+                </tr>
+                </thead>
+
+                <tfoot>
+                <tr>
+                    <th>notification content</th>
+                    <th>created by</th>
+                    <th>date created</th>
+
+                </tr>
+                </tfoot>
+                <tbody>
+
+                <div th:if="${notification != null  }">
+                <tr >
+                    <td th:text="${notification.getNotificationBody()}"></td>
+                    <td th:text="${notification.getCreatedBy().getUsername()}"></td>
+                    <td th:text="${notification.getDate()}"></td>
+                </tr>
+                </div>
+
+                </tbody>
+            </table>
+
+            <!-- end of  issues user requested for help -->
+
+        </div>
+    </div>
+</div>
+
+    </div>

@@ -4,7 +4,9 @@ package com.utilityapps.colla.controllers;
 import com.utilityapps.colla.interfaces.HelpRequestI;
 import com.utilityapps.colla.interfaces.NextSequenceServiceI;
 import com.utilityapps.colla.interfaces.UserServiceI;
+import com.utilityapps.colla.models.CollaProblem;
 import com.utilityapps.colla.models.HelpRequest;
+import com.utilityapps.colla.services.CollaProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,19 +15,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class HelpRequestController {
     private final HelpRequestI helpRequestService;
     private final NextSequenceServiceI nextSequenceService;
     private final UserServiceI userService;
+    private final CollaProblemService collaProblemService;
 
     @Autowired
-    public HelpRequestController(HelpRequestI helpRequestService, NextSequenceServiceI nextSequenceService, UserServiceI userService) {
+    public HelpRequestController(HelpRequestI helpRequestService, NextSequenceServiceI nextSequenceService, UserServiceI userService, CollaProblemService collaProblemService) {
         this.helpRequestService = helpRequestService;
 
         this.nextSequenceService = nextSequenceService;
         this.userService = userService;
+        this.collaProblemService = collaProblemService;
     }
 
     @PostMapping("/helprequest")
@@ -34,7 +39,9 @@ public class HelpRequestController {
         helpRequest.setDateCreated(new Date());
         System.out.println(session.toString()+",.......................");
 //        long id  = Long.valueOf( session.getAttribute("id").toString() );
-        helpRequest.setFrom(userService.findUserById(Long.valueOf(7)));
+        helpRequest.setFrom(userService.findUserById((7L)));
+       CollaProblem collaProblem =  collaProblemService.findById(55L);
+       helpRequest.setCollaProblem(collaProblem);
 
         helpRequest.setId(nextSequenceService.getNextSequence("customSequences"));
 
@@ -56,11 +63,13 @@ public class HelpRequestController {
     }
 
     @GetMapping(value = "/helprequest/{id}")
-    public ModelAndView getRequestById(@RequestParam("id") long id,ModelAndView modelAndView ){
+    public ModelAndView getRequestById(@PathVariable("id") long id,ModelAndView modelAndView ){
 
-        HelpRequest helpRequest = helpRequestService.findById(id);
-        modelAndView.addObject("requests",helpRequest);
-        modelAndView.setViewName("requestlist");  //TODO add this view
+        Optional <HelpRequest> helpRequestOptional = helpRequestService.findById(id);
+        if(helpRequestOptional.isPresent()) {
+            modelAndView.addObject("request", helpRequestOptional.get());
+        } //TODO throw an exception if optional is empty
+        modelAndView.setViewName("helprequest");
 
         return modelAndView;
 

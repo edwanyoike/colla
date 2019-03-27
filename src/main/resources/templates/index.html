@@ -248,7 +248,7 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div class="container-fluid" id="dynamic-content">
 
           <!--section to add dynamic content-->
 
@@ -333,7 +333,7 @@
 
                     <tr th:each="request : ${helprequest}">
                       <td th:text="${request.getMessage()}"></td>
-                      <td th:text="${request.getCollaProblemId()}"></td>
+                      <td th:text="${request.getCollaProblem()}"></td>
                       <td th:text="${request.getDateCreated()}"></td>
                       <td th:text="${request.isSeen()}"></td>
                     </tr>
@@ -347,7 +347,10 @@
               </div>
             </div>
 
+          <!--end of section to add dynamic content-->
           </div>
+
+
           <!-- End of Page Wrapper -->
 
 

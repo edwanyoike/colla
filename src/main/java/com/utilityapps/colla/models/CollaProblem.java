@@ -15,7 +15,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Document(collection = "collaProblemId")
+@Document(collection = "collaProblem")
 public class CollaProblem {
 
     @Id

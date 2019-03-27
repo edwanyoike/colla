@@ -6,6 +6,7 @@ import com.utilityapps.colla.repositories.HelpRequestRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HelpRequestService implements HelpRequestI {
@@ -22,7 +23,7 @@ public class HelpRequestService implements HelpRequestI {
     }
 
     @Override
-    public HelpRequest findById(long id) {
+    public Optional<HelpRequest> findById(long id) {
         return helpRequestRepository.findById(id);
     }
 

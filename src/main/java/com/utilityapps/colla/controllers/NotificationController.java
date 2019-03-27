@@ -28,7 +28,7 @@ public class NotificationController {
     }
 
     @PostMapping("/notification")
-    public String createUser(@RequestBody Notification notification,HttpServletRequest request){
+    public String createUser(@RequestBody Notification notification, HttpServletRequest request) {
 
         notification.setId(nextSequenceService.getNextSequence("customSequences"));
         notification.setDate(new Date());
@@ -36,40 +36,53 @@ public class NotificationController {
         User user = userService.findUserById(7L);
         notification.setCreatedBy(user);
 
-        if(notificationService.save(notification) != null) {
+        if (notificationService.save(notification) != null) {
             return "done";
 
-        }
-        else
+        } else
             return "not done";
 
     }
 
     @GetMapping(value = "/notification")
-    public ModelAndView getAll(ModelAndView modelAndView){
+    public ModelAndView getAll(ModelAndView modelAndView) {
         List<Notification> notifications = notificationService.findAll();
-        modelAndView.addObject("notifications",notifications);
+        modelAndView.addObject("notifications", notifications);
         modelAndView.setViewName("notifications"); //TODO make this view
 
         return modelAndView;
     }
 
+    @GetMapping(value = "/notification/{id}")
+    public ModelAndView getAll(@PathVariable("id") long id, ModelAndView modelAndView) {
+        Optional<Notification> notificationOptional = notificationService.findById(id);
+
+        if (notificationOptional.isPresent()) {
+            modelAndView.addObject("notification", notificationOptional.get());
+
+        }
+
+        modelAndView.setViewName("notification");
+
+        return modelAndView;
+    }
+
     @GetMapping(value = "/usernotification")
-    public ModelAndView getAllPerUser(@PathVariable("id") Long id, ModelAndView modelAndView){
+    public ModelAndView getAllPerUser(@PathVariable("id") Long id, ModelAndView modelAndView) {
         List<Notification> notifications = notificationService.getAllPerUser(id);
-        modelAndView.addObject("notifications",notifications);
+        modelAndView.addObject("notifications", notifications);
         modelAndView.setViewName("notifications"); //TODO make this view
 
         return modelAndView;
     }
 
     @GetMapping(value = "/seennotification")
-    public ModelAndView getSeenNotification(ModelAndView modelAndView, HttpServletRequest request){
-        Long id  = Long.valueOf( request.getSession(false).getAttribute("user_id").toString() );
+    public ModelAndView getSeenNotification(ModelAndView modelAndView, HttpServletRequest request) {
+        Long id = Long.valueOf(request.getSession(false).getAttribute("user_id").toString());
         User user = userService.findUserById(id);
 
         List<Notification> notifications = notificationService.findSeenNotifications(id);
-        modelAndView.addObject("notifications",notifications);
+        modelAndView.addObject("notifications", notifications);
         modelAndView.setViewName("notifications"); //TODO make this view
 
         return modelAndView;
@@ -77,38 +90,31 @@ public class NotificationController {
 
 
     @GetMapping(value = "/unseennotification")
-    public ModelAndView getUnseenNotification(ModelAndView modelAndView, HttpServletRequest request){
-        Long id  = Long.valueOf( request.getSession(false).getAttribute("user_id").toString() );
+    public ModelAndView getUnseenNotification(ModelAndView modelAndView, HttpServletRequest request) {
+        Long id = Long.valueOf(request.getSession(false).getAttribute("user_id").toString());
         User user = userService.findUserById(id);
 
         List<Notification> notifications = notificationService.findUnseenNotifications(id);
-        modelAndView.addObject("notifications",notifications);
+        modelAndView.addObject("notifications", notifications);
         modelAndView.setViewName("notifications"); //TODO make this view
 
         return modelAndView;
     }
 
-    public ModelAndView getSingleNotification(@PathParam("id") Long id, ModelAndView modelAndView, HttpServletRequest request){
+
+    public ModelAndView getSingleNotification(@PathParam("id") Long id, ModelAndView modelAndView, HttpServletRequest request) {
 
         Optional<Notification> notificationOptional = notificationService.findById(id);
-        if(notificationOptional.isPresent())
-        {
-            modelAndView.addObject("notifications",notificationOptional.get());
-        }
-
-        else {
-            modelAndView.addObject("Zeronotifications","you have no notifications here");
+        if (notificationOptional.isPresent()) {
+            modelAndView.addObject("notifications", notificationOptional.get());
+        } else {
+            modelAndView.addObject("Zeronotifications", "you have no notifications here");
         }
 
         modelAndView.setViewName("notifications"); //TODO make this view
 
         return modelAndView;
     }
-
-
-
-
-
 
 
 }

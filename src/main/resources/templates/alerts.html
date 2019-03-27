@@ -1,6 +1,8 @@
 <ul class="navbar-nav ml-auto" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:th="http://www.thymeleaf.org">
 
+
+
     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
     <li class="nav-item dropdown no-arrow d-sm-none">
         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -36,37 +38,38 @@
 
 
             <!--start of notifications area-->
-            <div id="notifications-area">
+            <div class="notification">
             <!--unseen notifications-->
-            <div th:each="notifications : ${notification}">
+                <div th:each="notifications : ${notification}">
 
-                <div th:if="${ not notifications.getSeen()}" >
+                    <div th:if="${ not notifications.getSeen()}" >
 
-                    <a class="dropdown-item d-flex align-items-center" th:href="@{'/notification/' + ${notifications.getId()} }">
+                        <a class="dropdown-item d-flex align-items-center" href="#" th:name="${'/notification/' +notifications.getId()}  ">
 
-                        <div class="mr-3">
-                            <div class="icon-circle bg-primary">
-                                <i class="fas fa-envelope text-white"></i>
+                            <div class="mr-3">
+                                <div class="icon-circle bg-primary">
+                                    <i class="fas fa-envelope-open text-white"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div>
 
-                        <div  class="small text-dark-500 text-truncate" th:text="${notifications.getNotificationBody()}" > </div>
-                        <div class="small text-gray-500 font-weight-bold" th:text="${'by '+notifications.getCreatedBy().getUsername()} + ' on' + ${notifications.getDate()}">anonymous</div>
+                            <div>
 
-                        </div>
-                    </a>
+                                <div  class="small text-gray-500 text-truncate" th:text="${notifications.getNotificationBody()}" > </div>
+                                <div class="small text-gray-500 font-weight-bold" th:text="${'by '+notifications.getCreatedBy().getUsername()} + ' on' + ${notifications.getDate()}">anonymous</div>
+
+                            </div>
+                        </a>
+
+                    </div>
 
                 </div>
-
-            </div>
 
             <!--seen notifications-->
             <div th:each="notifications : ${notification}">
 
                 <div th:if="${ notifications.getSeen()}" >
 
-                    <a class="dropdown-item d-flex align-items-center" th:href="@{'/notification/' + ${notifications.getId()} }">
+                    <a class="dropdown-item d-flex align-items-center" href="#" th:name="${'/notification/' +notifications.getId()}  ">
 
                         <div class="mr-3">
                             <div class="icon-circle bg-primary">
@@ -86,10 +89,12 @@
 
             </div>
 
+                <a th:if="${notification.size()>0}" class="dropdown-item text-center small text-gray-500" th:href="@{/notification}">Show All Alerts</a>
+
         </div>
 
 
-            <a th:if="${notification.size()>0}" class="dropdown-item text-center small text-gray-500" th:href="@{/notification}">Show All Alerts</a>
+
         </div>
 
         <!--end of notification area-->
@@ -109,10 +114,12 @@
                 assistance requests
             </h6>
 
+
+            <div class="help-request" >
             <!--unseen requests-->
             <div th:each="request:${helpRequest}">
                 <div th:if="${ not request.isSeen()}" >
-                    <a   class="dropdown-item d-flex align-items-center" th:href="@{'/helprequest/' + ${request.getId()} }">
+                    <a   class="dropdown-item d-flex align-items-center" href="#" th:name="${'/helprequest/' +request.getId()}" >
 
                         <div class="mr-3">
                             <div class="icon-circle bg-primary">
@@ -131,8 +138,8 @@
 
             <!--seen requests-->
             <div th:each="request:${helpRequest}">
-                <div th:if="${  request.isSeen()}" >
-                    <a   class="dropdown-item d-flex align-items-center" th:href="@{'/helprequest/' + ${request.getId()} }">
+                <div th:if="${ request.isSeen()}" >
+                    <a   class="dropdown-item d-flex align-items-center" href="#" th:name="${'/helprequest/' +request.getId()}  ">
 
                         <div class="mr-3">
                             <div class="icon-circle bg-primary">
@@ -151,6 +158,40 @@
 
         </div>
 
+        </div>
+
     </li>
+
+    <script>
+        $('.notification  a').click(
+            function() {
+                var txt = $(this).attr('name');
+                $.ajax({
+                    type: "get",
+                    url: txt,
+                    dataType:'html',
+                    success: function (data) {
+
+                        $('#dynamic-content').html(data);
+                    }
+                });
+            });
+
+
+
+        $('.help-request  a').click(
+            function() {
+                var txt = $(this).attr('name');
+                $.ajax({
+                    type: "get",
+                    url: txt,
+                    dataType:'html',
+                    success: function (data) {
+
+                        $('#dynamic-content').html(data);
+                    }
+                });
+            })
+    </script>
 
 </ul>

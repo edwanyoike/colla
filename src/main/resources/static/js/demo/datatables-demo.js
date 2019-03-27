@@ -24,6 +24,8 @@ $(document).ready(function() {
             selector: 'td:first-child'
         }
     });
+
+
 });
 
 //notifications polling function.
@@ -93,22 +95,15 @@ function send(){
     });
 }*/
 
+send();
 
+$('.notification  a').click(
+    function() {
+        var txt = $(this).attr('href');
+        console.log(txt);
+        alert(txt);
+    });
 
-$(document).ready(function(){
-    send();
-});
-
- $(document).ready(function() {
-    $('#notifications-area  a').click(
-        function(e) {
-            var txt = $(e.target).text();
-            console.log(txt);
-        }
-
-
-    );
- });
 
 
 
