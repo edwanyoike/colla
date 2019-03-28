@@ -40,7 +40,7 @@ public class HelpRequestController {
         System.out.println(session.toString()+",.......................");
 //        long id  = Long.valueOf( session.getAttribute("id").toString() );
         helpRequest.setFrom(userService.findUserById((7L)));
-       CollaError collaError =  collaProblemService.findById(34L);
+       CollaError collaError =  collaProblemService.findById(43L).get(); //TODO add option.ispresent() check
        helpRequest.setCollaError(collaError);
 
         helpRequest.setId(nextSequenceService.getNextSequence("customSequences"));

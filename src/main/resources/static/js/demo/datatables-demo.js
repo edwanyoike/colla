@@ -1,6 +1,6 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
-  $('#dataTable').DataTable({
+  var repositoryTable = $('#dataTable').DataTable({
           columnDefs:[{targets:1,className:"truncate"}],
           createdRow: function(row){
               var td = $(row).find(".truncate");
@@ -22,8 +22,36 @@ $(document).ready(function() {
 
     );
 
+
+    $('#dataTable tr').click(function() {
+        var id = $(this).find("td").attr("name");
+
+        $.ajax({
+            type: "get",
+            url: id,
+            dataType:'html',
+            success: function (data) {
+
+                $('#dynamic-content').html(data);
+            }
+        });
+
+    });
 });
 
+
+
+/*
+$(document).ready(function() {
+
+    $('#dataTable tr').click(function() {
+        var id = $(this).find("td").attr("name");
+        alert(id);
+
+    });
+
+});
+*/
 
 
 

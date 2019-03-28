@@ -1,0 +1,62 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:th="http://www.thymeleaf.org">
+
+    <div class="card shadow mb-4" >
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"> </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered dataTable table-hover table-striped "  id="help-request-datatable" width="100%" cellspacing="0">
+                    <thead >
+                    <tr>
+                        <th>description</th>
+                        <th>error snippet</th>
+                        <th>times encountered</th>
+                        <th>solved</th>
+                        <th>creator</th>
+
+
+
+                    </tr>
+                    </thead>
+
+                    <tfoot>
+                    <tr>
+                        <th>description</th>
+                        <th>error snippet</th>
+                        <th>times encountered</th>
+                        <th>solved</th>
+                        <th>creator</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+
+                    <div th:if="${collaerror != null  }">
+                        <tr >
+                            <td th:text="${collaerror.getDescription()}"></td>
+                            <td th:text="${collaerror.getErrorSnipet()}"  ></td>
+                            <td th:text="${collaerror.getEncounteredTimes()}"></td>
+                            <td th:text="${collaerror.isSolved()}"></td>
+                            <td th:text="${collaerror.getCreateddBy().getUsername()}"></td>
+
+                        </tr>
+                    </div>
+
+                    </tbody>
+                </table>
+
+                <!-- end of  issues user requested for help -->
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+
+
+    </script>
+
+</div>

@@ -1,5 +1,6 @@
 package com.utilityapps.colla.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,11 +24,12 @@ public class User implements Serializable {
     private long id;
 
     private String username;
+
+
     private String password;
 
     @Override
-    public String
-    toString() {
+    public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +

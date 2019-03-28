@@ -13,5 +13,4 @@ public interface CollaErrorRepository extends MongoRepository<CollaError,Long> {
 
     List findByCreateddBy(User user);
     List findBySolved();
-    CollaError findById(long id);
 }
