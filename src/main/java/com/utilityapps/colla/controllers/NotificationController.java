@@ -33,7 +33,7 @@ public class NotificationController {
         notification.setId(nextSequenceService.getNextSequence("customSequences"));
         notification.setDate(new Date());
 //        Long id  = Long.valueOf( request.getSession(false).getAttribute("id").toString() );
-        User user = userService.findUserById(7L);
+        User user = userService.findUserById(1L);
         notification.setCreatedBy(user);
 
         if (notificationService.save(notification) != null) {

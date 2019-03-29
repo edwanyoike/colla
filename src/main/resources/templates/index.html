@@ -26,6 +26,9 @@
   <!-- Custom styles for alert-->
   <link href="css/main.css" rel="stylesheet">
 
+  <!--custom style for the comments-->
+  <link rel="stylesheet" href="css/comments.css">
+
 </head>
 
 <body id="page-top">
@@ -204,11 +207,6 @@
               <!--alerts.html-->
 
             </div>
-            <!--end of alerts-->
-
-            </li>
-
-
 
 
             <div class="topbar-divider d-none d-sm-block"></div>
@@ -252,63 +250,61 @@
 
           <!--section to add dynamic content-->
 
-            <!-- logged issues by the user logged in  -->
-            <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">errors repository (mouse over snippet to view all)</h6>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-striped  table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                    <tr class="truncate" >
-                      <th>description</th>
-                      <th>error snipet </th>
-                      <th>date created</th>
-                      <th>~ times encountered</th>
-                      <th>problem solved ?</th>
-                      <th>id</th>
+          <!-- start of  issues user requested for help -->
 
-
-
-                    </tr>
-                    </thead>
-
-                    <tfoot>
-                    <tr>
-                      <th >description</th>
-                      <th class="truncate">error snipet</th>
-                      <th>date created</th>
-                      <th> ~ times encountered</th>
-                      <th>problem solved ?</th>
-                      <th>id</th>
-
-                      <
-                    </tr>
-                    </tfoot>
-                    <tbody>
-
-                    <tr th:each="error : ${loggedIssues}">
-                      <td th:name="${'/collaerror/'+error.getId()}"  th:text="${error.getDescription()}"></td>
-                      <td th:text="${error.getErrorSnipet()}"></td>
-                      <td th:text="${error.getDateCreated()}"></td>
-                      <td th:text="${error.getEncounteredTimes()}"></td>
-                      <td th:text="${error.isSolved()}"></td>
-                      <td th:text="${error.getId()}"></td>
-
-                    </tr>
-
-
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary"> error repository</h6>
             </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered dataTable table-hover table-striped "  id="dataTable" width="100%" cellspacing="0">
 
-            <!-- end of logged issues by the user logged in  -->
+                  <thead>
+                  <tr class="truncate" >
+                    <th>description</th>
+                    <th>error snipet </th>
+                    <th>date created</th>
+                    <th>solution</th>
+                    <th>~ times encountered</th>
+                  </tr>
+
+                  </thead>
+
+                  <tfoot>
+                  <tr>
+                    <th >description</th>
+                    <th class="truncate">error snipet</th>
+                    <th>date created</th>
+                    <th>solution</th>
+                    <th> ~ times encountered</th>
 
 
-            <!-- start of  issues user requested for help -->
+
+                  </tr>
+                  </tfoot>
+
+                  <tbody>
+
+                  <tr th:each="error : ${loggedIssues}">
+                    <td th:name="${'/collaerror/'+error.getId()}"  th:text="${error.getDescription()}"></td>
+                    <td th:text="${error.getErrorSnipet()}"></td>
+                    <td th:text="${error.getDateCreated()}"></td>
+                    <td th:text="${error.getSolution()}"></td>
+                    <td th:text="${error.getEncounteredTimes()}"></td>
+
+                  </tr>
+
+
+                  </tbody>
+
+                </table>
+
+                <!-- end of  issues user requested for help -->
+
+
+
+                <!-- start of  issues user requested for help -->
 
             <div class="card shadow mb-4">
               <div class="card-header py-3">

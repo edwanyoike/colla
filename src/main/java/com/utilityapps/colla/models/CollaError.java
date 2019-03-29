@@ -33,6 +33,10 @@ public class CollaError {
 
     private boolean solved;
 
+    private String solution;
+
+
+
     //TODO add comments
     //TODO add  solvedby
 

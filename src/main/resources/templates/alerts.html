@@ -1,3 +1,5 @@
+<div>
+
 <ul class="navbar-nav ml-auto" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:th="http://www.thymeleaf.org">
 
@@ -55,7 +57,8 @@
                             <div>
 
                                 <div  class="small text-gray-500 text-truncate" th:text="${notifications.getNotificationBody()}" > </div>
-                                <div class="small text-gray-500 font-weight-bold" th:text="${'by '+notifications.getCreatedBy().getUsername()} + ' on' + ${notifications.getDate()}">anonymous</div>
+                                <div class="small text-gray-500 font-weight-bold" >anonymous</div>
+                                <!--th:text="${'by '+notifications.getCreatedBy().getUsername()} + ' on' + ${notifications.getDate()-->
 
                             </div>
                         </a>
@@ -80,7 +83,8 @@
                         <div>
 
                         <div  class="small text-gray-500 text-truncate" th:text="${notifications.getNotificationBody()}" > </div>
-                        <div class="small text-gray-500 font-weight-bold" th:text="${'by '+notifications.getCreatedBy().getUsername()} + ' on' + ${notifications.getDate()}">anonymous</div>
+                        <div class="small text-gray-500 font-weight-bold" >anonymous</div>
+                            <!--th:text="${'by '+notifications.getCreatedBy().getUsername()} + ' on' + ${notifications.getDate()}"-->
 
                         </div>
                     </a>
@@ -196,3 +200,5 @@
     </script>
 
 </ul>
+
+</div>

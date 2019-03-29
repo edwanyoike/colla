@@ -33,10 +33,13 @@ public class AuthenticationController {
         this.helpRequestService = helpRequestService;
     }
 
-    @RequestMapping(value = {"/login","/"})
+    @RequestMapping("/login")
     public ModelAndView login(ModelAndView modelAndView, HttpServletRequest request)
     {
+        System.out.println("login called by "+request.getRequestURI());
+
         if ( null == request.getSession(false) || request.getSession(false).getAttribute("id") == null ) {
+            System.out.println("no valid session so i am in here");
 
             modelAndView.setViewName("login");
             return modelAndView;
@@ -50,6 +53,7 @@ public class AuthenticationController {
     // Login form with error
     @RequestMapping("/login-error")
     public ModelAndView loginError(ModelAndView modelAndView) {
+        System.out.println("login errror calleld");
 
         modelAndView.addObject("loginError", "wrong values");
         modelAndView.setViewName("login");
@@ -59,13 +63,15 @@ public class AuthenticationController {
     @RequestMapping("/success")
     public ModelAndView loginSuccessful(ModelAndView modelAndView, HttpServletRequest request){
 
+        System.out.println("success calleld");
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username  //TODO find how to get ID
 
         User user = userService.findUserByUsername(name);
 
         request.getSession(true).setAttribute("id",user.getId());
-        System.out.println("this is the user Id ----> "+ user.getId());
+
 
         modelAndView.setViewName("index");
         return prepareDashboard(modelAndView,request);
@@ -75,15 +81,20 @@ public class AuthenticationController {
 
         @RequestMapping(value = "/x",method= RequestMethod.GET)
         public ModelAndView logout(HttpSession session,ModelAndView modelAndView) {
-            session.invalidate();
-           modelAndView.setViewName("redirect:login");
-            return modelAndView;
+            System.out.println("log out called");
+        session.removeAttribute("id");
+
+
+        session.invalidate();
+
+        modelAndView.setViewName("redirect:login");
+        return modelAndView;
         }
 
 
     private ModelAndView prepareDashboard(ModelAndView modelAndView, HttpServletRequest request)
     {
-        System.out.println(request.getSession(false));
+        System.out.println("prepare dashboard called");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username  //TODO find how to get ID
         User user = userService.findUserById( Long.parseLong( request.getSession(false).getAttribute("id").toString() ) );

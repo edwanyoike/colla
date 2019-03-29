@@ -39,8 +39,8 @@ public class HelpRequestController {
         helpRequest.setDateCreated(new Date());
         System.out.println(session.toString()+",.......................");
 //        long id  = Long.valueOf( session.getAttribute("id").toString() );
-        helpRequest.setFrom(userService.findUserById((7L)));
-       CollaError collaError =  collaProblemService.findById(43L).get(); //TODO add option.ispresent() check
+        helpRequest.setFrom(userService.findUserById((1L)));
+       CollaError collaError =  collaProblemService.findById(4L).get(); //TODO add option.ispresent() check
        helpRequest.setCollaError(collaError);
 
         helpRequest.setId(nextSequenceService.getNextSequence("customSequences"));

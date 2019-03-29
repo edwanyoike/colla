@@ -27,7 +27,7 @@ public class UserController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @PostMapping("/User")
+    @PostMapping("/user")
     public String createUser(@RequestBody User user){
 
         user.setId(nextSequenceService.getNextSequence("customSequences"));

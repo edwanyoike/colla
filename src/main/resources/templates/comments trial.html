@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/trial.css">
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
+
+    <title>sss</title></head>
+
+<body>
+<div class="container">
+    <div class="row row-centered">
+        <div class="col col-sm-9 col-centered">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="pull-left"><img src="http://placehold.it/20x20" class="img-circle">&nbsp;Post Title goes here</h4>
+                    <h5 class="pull-right">48 points · 9h</h5>
+                </div>
+                <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed dolor at velit ultricies porta. Mauris vehicula in arcu eget pulvinar. Phasellus vel condimentum purus. Cras luctus nisi eu neque aliquet, eget laoreet tellus rhoncus. Donec laoreet sed...</p>
+                    <div class="clearfix"></div>
+                    <p class="text-center frenMeta" style="margin: 0px;">Rate this post <a href="#" class="rate"><span class="glyphicon glyphicon-thumbs-up"></span></a>&nbsp;&nbsp;<a class="rate" href="#"><span class="glyphicon glyphicon-thumbs-down"></span></a>&nbsp;&nbsp;·&nbsp;&nbsp;Comments <span class="badge">3</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="btn btn-primary btn-xs btn-xs clickable">Reply <span class="glyphicon glyphicon-share-alt"></span></span>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="fren.php" class="btn btn-primary btn-xs btn-xs">Read more <span class="glyphicon glyphicon-info-sign"></span></a></p>
+                </div>
+            </div>
+            <div class="panel panel-default panel-comment panel-collapsed">
+                <div class="panel-body">
+                    <form class="form center-block">
+                        <div class="form-group">
+                            <textarea class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
+                        </div>
+                        <button class="btn btn-primary btn-sm pull-right" data-dismiss="modal" aria-hidden="true">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    jQuery(function ($) {
+        $('.frenMeta span.clickable').on("click", function (e) {
+            if ($('.panel-comment').hasClass('panel-collapsed')) {
+                // expand the panel
+                $('.panel-comment').slideDown();
+                $('.panel-comment').removeClass('panel-collapsed');
+                $('.panel-comment').addClass('panel-open');
+            } else {
+                // collapse the panel
+                $('.panel-comment').slideUp();
+                $('.panel-comment').addClass('panel-collapsed');
+                $('.panel-comment').removeClass('panel-open');
+            }
+        });
+    });
+</script>
+</html>
+
+
+
