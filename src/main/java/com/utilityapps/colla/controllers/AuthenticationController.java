@@ -97,7 +97,7 @@ public class AuthenticationController {
         System.out.println("prepare dashboard called");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username  //TODO find how to get ID
-        User user = userService.findUserById( Long.parseLong( request.getSession(false).getAttribute("id").toString() ) );
+        User user = userService.findUserById( Long.parseLong( request.getSession(false).getAttribute("id").toString() ) ).get();
 
         List<CollaError> loggedIssues = collaProblemService.findAll();
 

@@ -31,7 +31,7 @@ public class CollaErrorController {
         collaError.setDateCreated(new Date());
         System.out.println(session.toString()+",.......................");
 //        long id  = Long.valueOf( session.getAttribute("id").toString() );
-        collaError.setCreateddBy(userService.findUserById((1L)));
+        collaError.setCreateddBy(userService.findUserById((1L)).get());
 
 
         collaError.setId(nextSequenceService.getNextSequence("customSequences"));

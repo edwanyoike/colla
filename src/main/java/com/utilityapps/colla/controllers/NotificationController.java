@@ -33,7 +33,7 @@ public class NotificationController {
         notification.setId(nextSequenceService.getNextSequence("customSequences"));
         notification.setDate(new Date());
 //        Long id  = Long.valueOf( request.getSession(false).getAttribute("id").toString() );
-        User user = userService.findUserById(1L);
+        User user = userService.findUserById(1L).get();
         notification.setCreatedBy(user);
 
         if (notificationService.save(notification) != null) {
@@ -79,7 +79,7 @@ public class NotificationController {
     @GetMapping(value = "/seennotification")
     public ModelAndView getSeenNotification(ModelAndView modelAndView, HttpServletRequest request) {
         Long id = Long.valueOf(request.getSession(false).getAttribute("user_id").toString());
-        User user = userService.findUserById(id);
+        User user = userService.findUserById(id).get();
 
         List<Notification> notifications = notificationService.findSeenNotifications(id);
         modelAndView.addObject("notifications", notifications);
@@ -92,7 +92,7 @@ public class NotificationController {
     @GetMapping(value = "/unseennotification")
     public ModelAndView getUnseenNotification(ModelAndView modelAndView, HttpServletRequest request) {
         Long id = Long.valueOf(request.getSession(false).getAttribute("user_id").toString());
-        User user = userService.findUserById(id);
+        User user = userService.findUserById(id).get();
 
         List<Notification> notifications = notificationService.findUnseenNotifications(id);
         modelAndView.addObject("notifications", notifications);

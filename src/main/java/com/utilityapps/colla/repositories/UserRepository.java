@@ -14,6 +14,5 @@ import java.util.Optional;
 public interface UserRepository extends MongoRepository<User, Long> {
 
     User findUserByUsername(String username);
-    User findUserById(Long id);
 
 }

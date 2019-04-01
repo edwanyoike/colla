@@ -6,6 +6,7 @@ import com.utilityapps.colla.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserServiceI {
@@ -33,7 +34,7 @@ public class UserService implements UserServiceI {
     }
 
     @Override
-    public User findUserById(Long id) {
-        return userRepository.findUserById(id);
+    public Optional<User> findUserById(Long id) {
+        return userRepository.findById(id);
     }
 }

@@ -1,9 +1,9 @@
 package com.utilityapps.colla.interfaces;
 
 import com.utilityapps.colla.models.User;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface UserServiceI {
@@ -13,6 +13,6 @@ public interface UserServiceI {
     List findAll();
 
     User findUserByUsername(String uname);
-    User findUserById(Long id);
+    Optional<User> findUserById(Long id);
 
 }
